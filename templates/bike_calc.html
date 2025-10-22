@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Bike Calc</title>
+</head>
+<body>
+
+<h1>Bike Calc</h1>
+<form action="/calculate" method="post">
+    <p>
+        <label for="isHoliday">Is it a holiday? </label>
+        <input name="isHoliday" id="isHoliday" type="checkbox">
+    </p>
+    <p>
+        <label for="season">Enter the season (1: spring, 2: summer, 3: fall, 4: winter): </label>
+        <input name="season" id="season" type="number" min="1" max="4">
+    </p>
+    <p>
+        <label for="temp">Enter the normalized temperature in Celsius (-8 to +39): </label>
+        <input name="temp" id="temp" type="number" min="-8" max="39" step="0.1">
+    </p>
+    <button type="submit">Calculate</button>
+</form>
+    <p>
+       <a href="/">Home</a>
+    </p>
+</body>
+</html>
