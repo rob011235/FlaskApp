@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Crime Map</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <script src='https://unpkg.com/maplibre-gl@latest/dist/maplibre-gl.js'></script>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Crime Map Coming Soon!</h1>
+    </div>
+    <table border=0 cellpadding="1" style="width: 700px; background-color:black;">
+        <tr>
+            <td>
+                <p style="text-align:center">
+                    <img src="static/images/cop.jpg" alt="cop"
+                        style='padding:0px; border:0px solid #021a40; width: 100%; height: 100%'>
+                </p>
+            </td>
+            <td>
+                <h1>
+                    <p style="text-align:center">
+                        <font color="white">Chapter 6: Predicting Crime In San Francisco</font>
+                    </p>
+                </h1>
+            </td>
+            <td>
+                <p style="text-align:center">
+                    <img src="static/images/thief.jpg" alt="thief"
+                        style='padding:0px; border:0px solid #021a40; width: 100%; height: 100%'>
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div id="time_segment" class='time_segment'>{{time_segment_int}}</div>
+            </td>
+            <td>
+                <p style="text-align:center">
+                    <img src="{{image_source}}" alt="time segment" id="time_segment_image"
+                        style='padding:0px; border:0px solid #021a40; width: 50px; height: 50px'>
+                </p>
+            </td>
+            <td>
+
+            </td>
+        </tr>
+
+    </table>
+    <div id="my-map" style="width: 100%;"></div>
+    <script>
+        // Obtain your API Key at https://myprojects.geoapify.com
+        const myAPIKey = "4ae8fdf6030145c39d0b18d640cecd74";
+
+        // Create a Mapbox GL Map instance
+        const map = new maplibregl.Map({
+        center: [-122.434, 37.775],
+        zoom: 13, // Set the initial zoom level
+        container: 'my-map', // Specify the HTML container where the map will be displayed
+        style: `https://maps.geoapify.com/v1/styles/osm-bright-smooth/style.json?apiKey=${myAPIKey}` // Use the specified map style with the provided API key
+        });
+
+        // Add map navigation controls (zoom, pan)
+        map.addControl(new maplibregl.NavigationControl());
+
+        // After the map has loaded
+        map.on('load', () => {
+            // Here you can add markers, layers, or other customizations
+        });
+    
+
+    </script>
+    <table border=1 cellpadding="1" style="width: 700px; background-color:black;">
+        <tr>
+            <td>
+                <p style="text-align:center">
+                <form id='submit_params' method="POST" action="{{ url_for('crime_map') }}">
+                    <div class="slidecontainer" style='width: 100%;'>
+                        <label>
+                            <font color="white">Select crime horizon: <span
+                                    id="label_slider_value">{{date_horizon}}</span></font>
+                        </label><BR>
+                        <input type="range" min="1" max="210" value="{{current_value}}" name="slider_crime_horizon"
+                            id="slider_crime_horizon" step="1" style='width: 100%;'>
+                    </div>
+                </form>
+            </td>
+        </tr>
+    </table>
+    <script>
+        // Slider logic
+        var slider1 = document.getElementById("slider_crime_horizon");
+        var output1 = document.getElementById("label_slider_value");
+
+        slider1.onmouseup = function () {
+            document.getElementById("submit_params").submit();
+        }
+
+        slider1.oninput = function () {
+            var horizon_date = new Date();
+            horizon_date.setDate(horizon_date.getDate() + Math.trunc(parseInt(this.value) / 3));
+            output1.innerHTML = (horizon_date.getMonth() + 1) + "/" + horizon_date.getDate() + "/" + horizon_date.getFullYear(); //this.value;
+
+            if ((parseInt(this.value) / 3) % 3 == 0) {
+                time_segment_image.src = "static/images/morning.jpg";
+            }
+            else if ((parseInt(this.value) / 3) % 3 == 1) {
+                time_segment_image.src = "static/images/afternoon.jpg";
+            }
+            else {
+                time_segment_image.src = "static/images/night.jpg";
+            }
+        }
+    </script>
+</body>
+
+</html>

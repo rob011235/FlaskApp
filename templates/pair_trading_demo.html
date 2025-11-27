@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Pair Trading Demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+</head>
+
+<body>
+	<div class="container">
+		<form id="submit_params" method="post" action="{{ url_for('get_pair_trade') }}">
+			<table style="background-color: black;" border=0>
+				<tr>
+					<td>
+						<img src="/static/images/ticker-title.png" alt="trading booth" style="padding:0px; border:0px solid #021a40; width: 100%; height: 100%">
+					</td>
+				</tr>
+				<tr>				
+					<td>
+						<div class="container-fluid">
+							<div class="row">
+								<div class="col-md-4 col-sm-6 col-xs-12">
+									<p style="text-align:center">
+										<img src="static/images/up-arrow.png" alt="buy" style='padding:0px; border:0px solid #021a40; width: 20%; height: 20%'>
+										
+										<BR><font color="white">Buy: <B>{{long_size}}</b> shares<BR>Symbol: <B>{{long_symbol}}</B><BR>At: $<B>{{long_last_close}}</B></font>
+									</p>
+								</div>
+		
+								<div class="col-md-4 col-sm-6 col-xs-12">
+									<label for="male"><font color="white">Budget Limit:</font></label><BR>
+										<input type="number" class="form-control" id="fare"									placeholder="Enter trade budget" name="selected_budget" value="{{selected_budget}}">
+										<BR>
+										<button class="btn btn-default" type="submit" style="width: 100%; height: 30px;">Get Trade</button>
+								</div>
+		
+								<div class="col-md-4 col-sm-6 col-xs-12">
+									<p style="text-align:center">
+										<img src="static/images/down-arrow.png" alt="sell" style='padding:0px; border:0px solid #021a40; width: 20%; height: 20%'>
+										<BR><font color="white">Short: <B>{{short_size}}</b> shares<BR>Symbol: <B>{{short_symbol}}</B><BR>At: $<B>{{short_last_close}}</B></font>
+									</p> 
+								</div>
+							</div>
+						</div>
+					</td>
+				</tr>
+			</table>
+		</form>
+	</div>
+</body>

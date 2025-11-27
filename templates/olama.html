@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Bike Calc</title>
+</head>
+<body>
+
+<h1>Olama</h1>
+
+<p><strong>Answer:</strong> {{ answer }}</p>
+
+<form action="/olama" method="post">
+  <div class="form-group">
+    <label for="olama_prompt">Prompt</label>
+    <textarea class="form-control" id="olama_prompt" name="olama_prompt"></textarea>
+    <button type="submit" class="btn btn-primary">Submit</button>
+    
+  </div>
+</form>
+</body>
+</html>

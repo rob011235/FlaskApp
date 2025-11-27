@@ -1,2 +1,7 @@
 Flask==3.1.2
 scikit-learn==1.7.2
+pandas==2.3.3
+numpy==2.3.4
+logging==0.4.9.6
+scikit-learn==1.7.2
+ollama==0.6.1
