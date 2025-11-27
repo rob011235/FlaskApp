@@ -221,13 +221,14 @@ def crime_map():
 
 @app.route("/olama",methods=['POST','GET'])
 def olama():
+    # You must set the OLLAMA_API_KEY environment variable to your Ollama API key
     if request.method == 'POST':
         print("Received POST request    for Olama")
         prompt = request.form.get('olama_prompt')
         print("Prompt: ", prompt)
         client = Client(
             host='https://ollama.com',
-            headers={'Authorization': 'Bearer 1b9a19ff7e564536b4af41a1a9809362.KBhabQ_vinpyhSgd5zixYf44'}
+            headers={'Authorization': 'Bearer ' + os.getenv('OLLAMA_API_KEY')}
         )
 
         messages = [
